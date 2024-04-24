@@ -1,0 +1,104 @@
+1- the benefits of Next.js 
+        1- server side rendering automatically
+        2- SEO (search engine optimization) => SEO is crucial for optimizing a website's visibility and ranking in search engine results
+                => increase organic traffic
+                =. enhanced user experience
+        3- Routing (next.js uses file-based routing system)
+                => the routing is handled by the file system
+                => use files for the routes 
+                (app)
+                    (blog) => https://localhost:3000/blog
+                    (about) => https://localhost:3000/about
+                    (profile) => https://localhost:3000/profile
+
+        4- FullStack applications (API Routes)
+            - enabling the creation of serverless functions to handle api requests
+            - serverless APIs in Next.js are a way of creating API endpoints without the need for a traditional server 
+                it allows us to build and deploy APIs:
+                        - without managing server infrastructure
+                        - worrying about scaling scaling their server as traffic increases
+            - you can use this feature , by creating (API endpoints) using file (route.js)
+                    (app)
+                        (blog) => route.js
+                        (about) => route.js
+                        (profile) => route.js
+
+        4- Automatic Code splitting :
+                => code splitting is a technique that breaks down large bundles of javascript code into smaller,
+                    more manageable chunks that can be loaded as needed
+                => this reduces the initial load time of a website and optimizes the user's experience while browsing
+                    - instead of using in react 
+                            const About = lazy(()=> import('./About'))
+                            const App = ()=> {
+                                return(
+                                    <Suspense fallback={<div> Loading ...</div>}
+                                        <About/>
+                                    </Suspense>
+                                )
+                            }
+                => But in Next.js this process is entirely Automatic
+                    it uses automatic code splitting by default to split pages into separate chunks
+
+======================= Routing    ==================
+
+2- page.js file which is responsible for starting page
+
+    => filenames Matter!!
+            next.js relies on reserved , special filenames
+            But the filenames only matter inside the app folder
+
+        => page.js => Define page content, is the actual content,
+        => layout.js => Define wrapper around pages (around one or more pages)
+        => not-found.js => Define "not Found" fallback page
+        => error.js => Define "error" fallback page
+        => loading.js => Fallback page which is shown whilst sibling or nested pages (or layouts) are fetching data
+        => route.js => Allows you to create an API route (i.e., a page which does NOT return JSX code but instead data, e.g., in the JSON format)
+
+
+3- you can navigate between pages using links
+        - However, using regular anchor elements (<a>) for navigation can cause the browser to reload the entire page,
+          which is not ideal for single-page applications.
+        - To maintain the single-page application behavior, Next.js provides a special Link component from next/link that you should use instead of anchor elements. 
+            This Link component ensures that navigation happens client-side, without a full page reload.
+        - When using the Link component, the content of the next page is still pre-rendered on the server,
+          but it is sent to the client and handled by client-side JavaScript code to update the UI, 
+
+    => we can't use <a> tag because it will reload the page 
+       we use Link from next/link instead
+        ex:
+            <a href="/about">About us</a>
+            => import Link from 'next/link'
+            <Link href="/about"> About us </Link>
+         
+
+4- globals.css: Contains CSS styles for the entire application.
+     It is imported into the layout.js file to make these styles available on every page.
+
+5- icon.png: Special file name used as a favicon for the website.
+    Adding an image called icon.png to the app folder automatically sets it as the favicon.
+
+    app folder => icon.png => icon for in the browser's tab next to the website's name
+
+6- components folder: Contains React components that are used across multiple pages.
+    These components are not automatically treated as pages by Next.js and can be used to organize your UI.
+
+    - To use these components: 
+        you can import them into your pages and render them as you would with any other React component.
+    - using the @ symbol  instead of (./) to refer to the root project folder in import paths
+        example: 
+                import component from './components/component'
+            use @ instead ./
+                import component from '@/components/component'
+
+        example: 
+            import Header from "@/components/header";
+            export default function Home() {
+                        return (
+                            <main>
+                            <Header />
+                            </main>
+                        )}
+
+7- dynamic route
+        Dynamic routes in Next.js provide a powerful way to create dynamic content based on the URL,
+        making it easier to build dynamic and flexible websites.
