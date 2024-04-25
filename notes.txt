@@ -178,3 +178,73 @@
             2- <Image src={logoImg} alt="A plate" priority />
                 The priority attribute: which tells Next.js to prioritize الاولويه ف التحميل the loading of this image.
                  This is useful for logos and other important images that should be displayed as soon as possible.
+
+
+12- using useState, useEffect with Next 14 
+    Error: You're importing a component that needs useState. It only works in a Client Component but none of its parents are marked with "use client", so they're Server Components by default.
+
+    1- Server Component: or (React Server Components (RSC))
+            React Server Components, are rendered on the server-side. In a NextJS project
+            by default, all React components are Server Components.
+            This means that the components are rendered on the server, and only the finished HTML code is sent to the client's browser. 
+            This approach improves performance by reducing the amount of client-side JavaScript code that needs to be downloaded. 
+            It also enhances search engine optimization, as web crawlers can see pages with complete content.
+
+           => hooks & handle user interactions are not available in server side
+
+            example: // Server Component
+                    export default function CourseList() {
+                        console.log("this component run on the server")
+                    return (
+                        <div>
+                        {/* content */}
+                        </div>
+                    );
+                     }
+
+    2- Client Components: 
+        Client Components are rendered on the client-side. In a NextJS project
+        They can contain code or use features that are only available in the client's browser, such as state hooks, event handlers, and the useEffect hook.
+    
+    3- Use of Client Components in NextJS ("use client") directive :
+            to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
+            developers can explicitly create Client Components by adding the useClient directive at the top of the file.
+            This allows for the use of client-side features like event handlers and state management.
+            useClient; //=> to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
+            This means that this part will be created, or rendered, directly in the web browser of the person using your website. useClient, you're saying that this part of your website should be a "Client Component." 
+
+            => components that are pre-rendered on the server but also on the client
+            => hooks & handle user interactions will be available in client side
+
+
+
+            example: // Client Component
+                
+                "use client"; //=> to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
+
+                export default function CourseList() {
+                    // Client-side code here
+                    // Event handlers, state hooks, etc.
+                    console.log("this component will run on the client-side because useClient we use it when working with Event handlers, state hooks,")
+
+                    return (
+                        <div>
+                        {/* Course list content */}
+                        </div>
+                    );
+                    }
+
+             example 2:
+                    // Client Component
+                    "use client"
+
+                    export default function MyComponent() {
+                    const [count, setCount] = useState(0);
+
+                    return (
+                        <div>
+                        <button onClick={() => setCount(count + 1)}>Click me</button>
+                        <p>Count: {count}</p>
+                        </div>
+                    );
+                    }
