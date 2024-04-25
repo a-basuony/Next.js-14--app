@@ -72,6 +72,7 @@
          
 
 4- globals.css: Contains CSS styles for the entire application.
+    import globals.css in layout.js file
      It is imported into the layout.js file to make these styles available on every page.
 
 5- icon.png: Special file name used as a favicon for the website.
@@ -127,3 +128,53 @@
                                 </main>
                             );
                             };
+
+8- import images :
+        import logoImg from "@/assets/logo.png";
+        <img src={logoImg.src} alt="A plate" />
+
+9- app folder => layout.js : 
+        - It is responsible for rendering the main layout of the application, which includes the main header and the main content.
+        - layout : is a function component
+
+            import MainHeader from "@/components/main-header";
+            import "./globals.css";
+
+
+            export default function RootLayout({ children }) {
+                        return (
+                            <html lang="en">
+                            <body>
+                                <MainHeader />
+                                {children}
+                            </body>
+                            </html>
+                        );
+                        }
+
+          -  this is the main layout for all project 
+          -  you can import all components to add them to the layout
+
+
+10- using css modules with Next.js
+    1- global css import it  in layout.js (app =>layout.js) file 
+
+    2- css for components (main-header.js , main-header.module.css)
+        main-header.js:
+             => import classes from './main-header.module.css'
+               <Link  className={classes.logo} href="/" />
+
+11- working with images
+
+            <img src={logoImg.src} alt="A plate with food on it" />
+        
+    instead of using the img tag , we can use the next/image tag :
+
+            1-  imported from the "next/image" module  imported from the "next/image"
+                that provides optimized image loading and rendering
+
+                import Image from "next/image";
+
+            2- <Image src={logoImg} alt="A plate" priority />
+                The priority attribute: which tells Next.js to prioritize الاولويه ف التحميل the loading of this image.
+                 This is useful for logos and other important images that should be displayed as soon as possible.
