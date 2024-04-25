@@ -168,7 +168,7 @@
 
             <img src={logoImg.src} alt="A plate with food on it" />
         
-    instead of using the img tag , we can use the next/image tag :
+    => instead of using the img tag , we can use the <Image> from next/image tag :
 
             1-  imported from the "next/image" module  imported from the "next/image"
                 that provides optimized image loading and rendering
