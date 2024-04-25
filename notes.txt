@@ -102,3 +102,28 @@
 7- dynamic route
         Dynamic routes in Next.js provide a powerful way to create dynamic content based on the URL,
         making it easier to build dynamic and flexible websites.
+
+       1- to make dynamic route :
+            - blog folder:   (/blog it will render pag.js)
+                    [slug] folder: (this is dynamic route and will render page.js in every dynamic route )
+                            page.js 
+                    page.js
+
+        2-    in blog => page.js =>  (localhost:3000/blog)
+                        <Link href="/blog/post-1">Post 1</Link>
+                        <Link href="/blog/post-2">Post 2</Link>
+            
+        3-    it will render in blog => [slug] => page.js => (localhost:3000/blog/post-1), (localhost:3000/blog/post-2)
+
+        4- you can access the dynamic route with 
+            = by extract the {params} and then use the dynamic route folder name 
+                like {params.slug}
+                
+                const BlogPostPage = ({ params }) => {
+                            return (
+                                <main>
+                                <h1>BlogPostPage</h1>
+                                <p>{params.slug}</p>
+                                </main>
+                            );
+                            };
