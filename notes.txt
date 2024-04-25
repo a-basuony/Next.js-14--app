@@ -47,8 +47,8 @@
             next.js relies on reserved , special filenames
             But the filenames only matter inside the app folder
 
-        => page.js => Define page content, is the actual content,
-        => layout.js => Define wrapper around pages (around one or more pages)
+        => page.js => (localhost:3000/) Define page content, is the actual content, the starting page (localhost:3000/)
+        => layout.js => Define wrapper around all app or  pages (around one or more pages)
         => not-found.js => Define "not Found" fallback page
         => error.js => Define "error" fallback page
         => loading.js => Fallback page which is shown whilst sibling or nested pages (or layouts) are fetching data
