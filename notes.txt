@@ -175,9 +175,10 @@
 
                 import Image from "next/image";
 
-            2- <Image src={logoImg} alt="A plate" priority />
+            2- <Image src={logoImg} alt="A plate" priority fill />
                 The priority attribute: which tells Next.js to prioritize الاولويه ف التحميل the loading of this image.
-                 This is useful for logos and other important images that should be displayed as soon as possible.
+                This is useful for logos and other important images that should be displayed as soon as possible.
+                fill attribute : the image should fill the available space in the parent component if you don't width and height of that image
 
 
 12- using useState, useEffect with Next 14 
@@ -296,3 +297,5 @@
                         };
 
                         export default NavLink;
+
+

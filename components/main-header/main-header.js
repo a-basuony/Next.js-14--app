@@ -3,12 +3,10 @@ import Image from "next/image";
 
 import logoImg from "@/assets/logo.png";
 import classes from "./main-header.module.css";
-import MainHeaderBackground from "./mian-header-background";
-import { usePathname } from "next/navigation";
+import MainHeaderBackground from "./main-header-background";
 import NavLink from "./nav-link";
 
 const MainHeader = () => {
-  const path = usePathname();
   return (
     <>
       <MainHeaderBackground />
