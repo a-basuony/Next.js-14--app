@@ -299,3 +299,7 @@
                         export default NavLink;
 
 
+14- Sqlite Database
+    we use sqlite database because it can be used locally without need database server or any other complex setup
+
+    install : npm install better-sqlite3
