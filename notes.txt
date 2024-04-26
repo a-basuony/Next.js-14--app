@@ -210,7 +210,7 @@
             to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
             developers can explicitly create Client Components by adding the useClient directive at the top of the file.
             This allows for the use of client-side features like event handlers and state management.
-            useClient; //=> to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
+            "use client" //=> to unlock the ability to run client-side code, utilize client-side hooks like useState, and handle user interactions directly in the browser
             This means that this part will be created, or rendered, directly in the web browser of the person using your website. useClient, you're saying that this part of your website should be a "Client Component." 
 
             => components that are pre-rendered on the server but also on the client
