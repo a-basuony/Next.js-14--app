@@ -234,7 +234,7 @@
                     );
                     }
 
-             example 2:
+            example 2:
                     // Client Component
                     "use client"
 
@@ -248,3 +248,51 @@
                         </div>
                     );
                     }
+
+
+13- working with nav links and paths
+    
+    1- to get path we use usePathname() from "next/navigation"
+
+            import { usePathname } from "next/navigation";
+            const path = usePathname();
+            use it like : className={
+                                path.startsWith("/meals")
+                                ? `${classes.link} ${classes.active}`
+                                : classes.link
+                            }
+            another ex : className={
+                                path.startsWith("/community")
+                                ? `${classes.link} ${classes.active}`
+                                : classes.link
+                            }
+
+    2- solve the error:
+        usePathname only works in Client Components. Add the "use client" directive at the top of the file to use it. 
+        add to the top of file "use client"
+
+        Example : 
+        
+                        "use client";
+
+                        import Link from "next/link";
+                        import { usePathname } from "next/navigation";
+                        import classes from "./nav-link.module.css";
+
+                        const NavLink = ({ href, children }) => {
+                        const path = usePathname();
+                        return (
+                            <Link
+                            href={href}
+                            className={
+                                path.startsWith(href)
+                                ? `${classes.link} ${classes.active}`
+                                : classes.link
+                            }
+                            >
+                            {children}
+                            </Link>
+                        );
+                        };
+
+                        export default NavLink;
