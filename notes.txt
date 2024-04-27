@@ -379,3 +379,136 @@
         if (!meal) {
             notFound();
         }
+
+19- example with working with image files and pick one
+                    "use client";
+
+                    import Image from "next/image";
+                    import { useRef, useState } from "react";
+
+                    import classes from "./image-picker.module.css";
+
+                    export default function ImagePicker({ label, name }) {
+                    const [pickedImage, setPickedImage] = useState();
+                    const imgInput = useRef();
+
+                    function handlePickClick() {
+                        imgInput.current.click();
+                    }
+
+                    function handleImageChange(event) {
+                        const file = event.target.files[0];
+
+                        if (!file) {
+                            setPickedImage(null);
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            // console.log(reader.result);
+                            setPickedImage(reader.result);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+
+                    return (
+                        <div className={classes.picker}>
+                        <label htmlFor={name}>{label}</label>
+                        <div className={classes.controls}>
+                            <div className={classes.preview}>
+                            {!pickedImage && <p>No image picked yet.</p>}
+                            {pickedImage && (
+                                <Image src={pickedImage} alt="The image selected by user." fill />
+                            )}
+                            </div>
+                            <input
+                            className={classes.input}
+                            type="file"
+                            id={name}
+                            accept="image/png, image/jpeg"
+                            name={name}
+                            ref={imgInput}
+                            onChange={handleImageChange}
+                            />
+                            <button className={classes.button} onClick={handlePickClick}>
+                            Pick an Image
+                            </button>
+                        </div>
+                        </div>
+                    );
+                    }
+
+
+20- Next.js, a popular framework for building React applications, offers an alternative approach for full-stack applications with both frontend and backend. By creating a Server Action,
+    you can handle form submissions more conveniently.
+    -This approach to handling form submissions using Server Actions in Next.js
+    -provides a powerful and convenient way to handle form submissions in a full stack application. 
+    -It ensures that form data is handled securely on the server, and makes it easy to collect and store form data.
+
+   1=> Form Submission in React:
+        In most React projects, form submissions are handled by adding an onSubmit prop to the form component
+        This prop is assigned a function that is executed when the form is submitted. 
+        This function typically prevents the default browser behavior, collects all the data from the form, and sends it to a backend.
+
+    2=> Full Stack Application: (using Next.js)
+        In the context of a full stack application, where you have both frontend and backend,
+        Next.js provides a more convenient pattern for handling form submissions. 
+        Instead of manually handling the form submission and data collection, you can create a function in the component that holds the form.
+        you can leverage Server Actions, which are functions that execute exclusively on the server.
+    
+    3=> Creating a Server Action:
+        In your React component containing the form, create a function (e.g., shareMeal) with the 'use server' directive.
+        This directive indicates that the function should be executed on the server, ensuring server-side rendering.
+        Mark the function as async to enable asynchronous operations.
+
+    4=> Assigning the Server Action: 
+        The Server Action function can be assigned as a value for the action prop on a form. 
+        When the form is submitted, Next.js will automatically create a request and send it to the Next.js server, triggering this function. 
+        This function will execute on the server, not on the client.
+
+    5=> Handling Form Data: 
+        The Server Action function will automatically receive the form data that was submitted. 
+        This data is collected in a formData object, using the formData class available in JavaScript. 
+        You can extract the data from this object using the get method, which allows you to get the value that was entered into a certain input field. 
+        The input field is identified by its name.
+
+    6=> Storing the Data: 
+        Once you have extracted all the necessary data from the form, the next step is to store this data. 
+        This could involve storing the data in a database, or storing an uploaded file on the file system and storing a path to that image in the database.
+
+    7=> Testing the Server Action: To test the Server Action, you can simply log the data to the console.
+         When you submit the form, you should see the form data logged in the terminal where you started the development server.
+
+          ----------------------------------------------------  
+    1- you can use this Server Actions feature to create such a function that will be triggered when a form is submitted.
+
+        => "use server" : (server action)
+            inside of a function is different because this creates a called Server Action that will be executed on the server.
+            "use server" inside function that only executes on a server not in the client and you must add async before that function 
+            like components by default are server components
+            but you can't use (Server Action) in a client component
+            example: 
+                async function myAction (){
+                    'use server'
+                }
+
+            - why does this feature exist:
+                we use it to get the Form data and the data stored in formData automatically as a parameter for that function
+                to get the form data for specific input => formData.get('input name')
+                  ex:  title: formData.get("title"),
+                you must call this function to get the data inside the form tag by action attribute 
+
+                1- <form action="myAction">
+
+                2- async function myAction(formData){
+                        "use server"
+
+                        const data ={
+                            title: formData.get("title"),
+                            name: formData.get("name"),
+                            description: formData.get("description"),
+                            image: formData.get("image"),
+                        }
+                    }
+            
