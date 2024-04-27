@@ -352,5 +352,18 @@
                     </Suspense>
 
 16- Handling Errors in Next.js
-        => app folder => error.js file (to handle potential errors )
-          for example if loading data fails
+       1 => app folder => error.js file (to handle potential errors ) the file will render automatic when any error occur
+       2 => we must use "use client" in top of the file of error.js
+          for example if fetching data fails
+
+        ex:
+            "use client";
+            const error = ({ error }) => {
+            return (
+                <h1>404</h1>
+            );
+            };
+
+17- Invalid URL for (404 | page not found )
+        create a file : app folder => not-found.js file 
+            it will render automatically when the path or url is invalid and not found 
