@@ -302,4 +302,55 @@
 14- Sqlite Database
     we use sqlite database because it can be used locally without need database server or any other complex setup
 
-    install : npm install better-sqlite3
+    1- install : npm install better-sqlite3
+    2- add file : initdb.js
+    3- add file in folder lib: meals to connect with database and get all meals
+    4- get all meals and use it in app=> page.js 
+
+
+15-  how to improve the user experience of a webpage
+     by optimizing the loading process using NextJS
+
+        first    - app folder => (loading.js , loading.module.css) for loading 
+                    this file will render when fetching data it render automatically
+                    The current issue is that the loading text occupies the entire screen
+                    which isn't ideal because some parts of the page,
+                    like the header, don't depend on any loaded data and could be shown instantly.
+
+                Example: 
+                    inside app folder : create loading.js file 
+
+                        import classes from "./loading.module.css";
+
+                        const MealsLoadingPage = () => {
+                        return <p className={classes.loading}>Fetching meals...</p>;
+                        };
+
+                        export default MealsLoadingPage;
+
+
+      second  (or) => 
+                    A solution proposed is to separate the data fetching part into a different component,
+                    in this case, a component named 'Meals'.
+                    This component is responsible for fetching the data and returning the meals 
+                    The 'Meals' component is then wrapped with the 'Suspense' component provided by React.
+                    The 'Suspense' component allows handling of loading states and shows fallback content (like: <p>Loading...</p>) until the data has been loaded.
+                    loading.js (is no longer used. by using the 'Suspense' component)
+                    The loading.js file was doing the same thing as the 'Suspense' component, wrapping the page content with the 'Suspense' component and showing the loading content as a fallback.
+                    However, the manual approach using the 'Suspense' component provides more granular control over the loading states.
+
+            Example: 
+               1- import { Suspense } from 'react';
+
+               2- async function Meals() {
+                        const meals = await getMeals();
+                        return <MealsGrid meals={meals} />;
+                    }
+
+                3-  <Suspense fallback={<p className={classes.loading}>Fetching meals...</p>}>
+                            <Meals />
+                    </Suspense>
+
+16- Handling Errors in Next.js
+        => app folder => error.js file (to handle potential errors )
+          for example if loading data fails
