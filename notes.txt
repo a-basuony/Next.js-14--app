@@ -367,3 +367,15 @@
 17- Invalid URL for (404 | page not found )
         create a file : app folder => not-found.js file 
             it will render automatically when the path or url is invalid and not found 
+
+18- The notFound() function is a built-in function provided by the next/navigation package in Next.js
+    It is used to handle 404 errors when a requested page or resource is not found.
+
+    Example:
+        import { notFound } from "next/navigation";
+
+        const meal = getMeal(params.mealSlug);
+
+        if (!meal) {
+            notFound();
+        }
