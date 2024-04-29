@@ -26,6 +26,7 @@ const MealDetailPage = ({ params }) => {
         </div>
       </header>
       <main>
+        {/* outputting those instructions as HTML. */}
         <p
           className={classes.instructions}
           dangerouslySetInnerHTML={{ __html: meal.instructions }}

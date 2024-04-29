@@ -488,6 +488,9 @@
             "use server" inside function that only executes on a server not in the client and you must add async before that function 
             like components by default are server components
             but you can't use (Server Action) in a client component
+            - if you need to use it in a client component separate this function in single file and import it in the client component
+            - by default components in NextJs are Server Components but if you need to create Client component add in top of file "use client"
+
             example: 
                 async function myAction (){
                     'use server'
@@ -512,3 +515,28 @@
                         }
                     }
             
+
+
+21- install slugify & xss
+    npm install slugify xss 
+        slugify => Ahmed Basuoney (ahmed-basuoney)
+        xss => which will help us protect against cross-site scripting attacks.
+
+
+        import slugify from "slugify";
+        import xss from "xss";
+
+
+        export function saveMeal(meal) {
+        meal.slug = slugify(meal.title, {lower: true})
+        meal.instructions = xss(meal.instructions)
+        }
+
+22- storing Uploaded Images & Storing Data in the Database
+
+23- how to redirect user after submit form 
+
+        1-  import { redirect } from "next/navigation";
+        2-  redirect("/path"); 
+                ex: redirect("/meals");
+
