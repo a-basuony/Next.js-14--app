@@ -540,3 +540,26 @@
         2-  redirect("/path"); 
                 ex: redirect("/meals");
 
+
+24- Form Status (pending & submitted)
+
+    you can use (useFormStatus() ) hook from 'react-dom'
+
+    but you need to add 'use client'
+    
+    Example: 
+    
+        "use client";
+
+        import { useFormStatus } from "react-dom";
+        const MealsFromSubmit = () => {
+            const { pending } = useFormStatus();
+            return (
+                <button disabled={pending}>
+                    {pending ? "Submitting..." : "Share Meal"}
+                </button>
+            );
+        };
+
+
+
