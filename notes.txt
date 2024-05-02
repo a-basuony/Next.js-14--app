@@ -1,4 +1,4 @@
-1- the benefits of Next.js 
+1- the benefits of Next.js  (using app router , the old version use pages router)
         1- server side rendering automatically
         2- SEO (search engine optimization) => SEO is crucial for optimizing a website's visibility and ranking in search engine results
                 => increase organic traffic
@@ -596,5 +596,66 @@
     => npm start 
 
 
+27- in production when user send the data to the server it will not works because the caching in Next.js 14
+    
+    - where you need to ensure that the cached data for a specific path is updated 
+        use after sending data function => 
+            revalidatePath('/path') => path you want to be updated
+            revalidatePath('/path') => it provides a way to clear cached data for specific paths in your application
+            revalidatePath('/meals', 'layout') // it accept second path (nested path) to update the cached data 
+                // it will update the cached data for the path and the nested path
+                (meals folder => page.js file, layout folder => (page.js file)) /meals => page.js , layout folder => page.js
+
+            - If you would want to revalidate (update the caching data) for all the pages 
+                of your entire website, you could, by the way, do that
+                by targeting slash and then setting the mode to layout.
+                revalidatePath('/', 'layout')
+
+            example : 
+              revalidatePath("/meals"); // it tells next.js to update the cached data for the path
+              revalidatePath('/meals', 'layout') // it accept second path to update the cached data 
+
+28- storing uploaded files (or any other files that are generated at runtime) on the local filesystem is not a great idea (development mode)
+    - because those files will simply not be available in the running NextJS applications. there are not available in (production mode)
+    - instead you store the uploaded files on cloud like AWS
+            => create an AWS account 
+            => create a S3 bucket (containers that can be used to store files )
+            => Upload the dummy image files like (public/ images)
+            => Configure the bucket for serving the images
+            => Allowing S3 as an image source
+            => Storing uploaded images on S3
+      
+29- Meta Data 
+    1=> (Static MetaData) in root layout.js file : (title on the tab of browser, and description for the Search engine result)
+        if you add this metadata to a layout, it will automatically be added to all the pages
+        unless a page specifies its own metadata.
+
+            export const metadata = {
+                title: "title for the entire website",
+                description: "description for the entire website",
+            }
+
+
+    2=> (Static MetaData) set specific metadata for some pages ( title and description for every single page)
+            in meals page 
+                    
+                export const metadata = {
+                    title: "All Meals",
+                    description: "Browse the meals, shared by a food-loving community.",
+                };
+
+    3=> (Dynamic metadata depends on the data of that page)
+        1- create a async function must called generateMetadata() Next.js will execute it automatic
+        2- this function will receives the same the data (props) of our page component receives 
+
+        export async function generateMetadata({meal}){
+            if(!meal){
+                notFount() // call notFound function 
+            }
+            return{
+                title: meal.title,
+                description: meal.description,
+            }
+        }   
 
 
