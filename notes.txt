@@ -548,7 +548,7 @@
     but you need to add 'use client'
     
     Example: 
-    
+
         "use client";
 
         import { useFormStatus } from "react-dom";
@@ -560,6 +560,41 @@
                 </button>
             );
         };
+
+25- inputs validation 
+    in action.js before sending the request to the server to save the data 
+    you can check if the inputs are valid 
+
+    =>
+            1-  ex: 
+            async function shareMeal(formData){
+                if(inputs valid ){
+                        throw new Error('invalid inputs')
+                }
+                await sendToServer(formData)
+            }
+
+            2- create an (Error.js file )page and put it inside fields folder like (share)
+                it will render automatically
+
+    3 => 
+        useFormState() hook from "react-dom"
+        import {useFormState} from 'react-dom'
+
+          const [currentState, formAction ] = useFormState(shareMeal, { message: null });
+
+          - currentState or current response the latest response return from the server action or the initial state which is {message: null}
+                that state depends on the execution action of the server and its response
+                currentState => which either could be (null or Invalid Inputs) from {message: null} and (from shareMeal) from sending and validation inputs in file action {message: 'invalid input'}
+          - fromAction => which is set as a value for the current from in action attribute (action={fromAction})
+            <form action={fromAction}></form>
+
+          {currentState.message && <p>{currentState.message}</p>}
+
+26- start the app in production Server (mode )
+    => npm run build 
+    => npm start 
+
 
 
 
